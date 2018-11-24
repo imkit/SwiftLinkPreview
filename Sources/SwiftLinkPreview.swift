@@ -248,13 +248,10 @@ extension SwiftLinkPreview {
         if cancellable.isCancelled {return}
 
         var task: URLSessionDataTask?
-        var request = URLRequest(url: url)
-        request.httpMethod = "HEAD"
-
-        task = session.dataTask(with: request, completionHandler: { data, response, error in
+        
+        task = session.dataTask(with: url, completionHandler: { data, response, error in
             guard !cancellable.isCancelled
             else { return }
-
             if error != nil {
                 self.workQueue.async {
                     if !cancellable.isCancelled {
