@@ -428,6 +428,7 @@ extension SwiftLinkPreview {
         source = source.deleteTagByPattern(Regex.inlineScriptPattern)
         source = source.deleteTagByPattern(Regex.scriptPattern)
         source = source.deleteTagByPattern(Regex.commentPattern)
+        source = source.deleteTagByPattern(Regex.inputPattern)
 
         return source
 
@@ -435,11 +436,10 @@ extension SwiftLinkPreview {
 
     // Perform the page crawiling
     private func performPageCrawling(_ htmlCode: String, response: Response) -> Response {
-        var result = self.crawIcon(htmlCode, result: response)
 
         let sanitizedHtmlCode = htmlCode.deleteTagByPattern(Regex.linkPattern).extendedTrim
 
-        result = self.crawlMetaTags(sanitizedHtmlCode, result: result)
+        let result = self.crawlMetaTags(sanitizedHtmlCode, result: response)
 
         var otherResponse = self.crawlTitle(sanitizedHtmlCode, result: result)
 
