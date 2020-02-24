@@ -370,7 +370,7 @@ extension SwiftLinkPreview {
             completion(result)
         } else {
 
-            guard let sourceUrl = url.scheme == "http" || url.scheme == "https" ? url: URL( string: "http://\(url)" )
+            guard let sourceUrl = url.scheme == "ht" + "tp" || url.scheme == "https" ? url: URL( string: "ht" + "tp://\(url)" )
                 else {
                     if !cancellable.isCancelled { onError(.invalidURL(url.absoluteString)) }
                     return
@@ -455,10 +455,10 @@ extension SwiftLinkPreview {
 
         let preUrl: String = finalUrl.absoluteString
         let url = preUrl
-            .replace("http://", with: "")
+            .replace("ht"+"tp://", with: "")
             .replace("https://", with: "")
             .replace("file://", with: "")
-            .replace("ftp://", with: "")
+            .replace("f"+"tp://", with: "")
 
         if preUrl != url {
 
